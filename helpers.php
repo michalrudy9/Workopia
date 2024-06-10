@@ -9,6 +9,8 @@ function loadView(string $name): void
 {
     $viewPath = basePath("views/{$name}.php");
 
+    inspectAndDie($viewPath);
+    
     if (file_exists($viewPath)) {
         require_once $viewPath;
     } else {
@@ -25,4 +27,18 @@ function loadPartial(string $name): void
     } else {
         echo "Partial '{$name} not found!'";
     }
+}
+
+function inspect(mixed $value): void
+{
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+}
+
+function inspectAndDie(mixed $value): void
+{
+    echo "<pre>";
+    die(var_dump($value));
+    echo "</pre>";
 }
