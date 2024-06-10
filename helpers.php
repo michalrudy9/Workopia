@@ -8,8 +8,6 @@ function basePath(string $path = ""): string
 function loadView(string $name): void
 {
     $viewPath = basePath("views/{$name}.php");
-
-    inspectAndDie($viewPath);
     
     if (file_exists($viewPath)) {
         require_once $viewPath;
