@@ -6,8 +6,7 @@ require_once "../helpers.php";
 use Framework\Router;
 
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-$method = $_SERVER["REQUEST_METHOD"];
 
 $router = new Router();
 $routes = require_once basePath("routes.php");
-$router->route($uri, $method);
+$router->route($uri);

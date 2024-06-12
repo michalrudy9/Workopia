@@ -43,16 +43,49 @@ class Router
         $this->registerRoute("DELET", $uri, $controller);
     }
 
-    public function route(string $uri, string $method): void
+    public function route(string $uri): void
     {
-        foreach ($this->routes as $route) {
-            if ($route["uri"] === $uri && $route["method"] === $method) {
-                $controller = "App\\Controllers\\" . $route["controller"];
-                $controllerMethod = $route["controllerMethod"];
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-                $controllerInstance = new $controller();
-                $controllerInstance->$controllerMethod();
-                return;
+        foreach ($this->routes as $route) {
+            $uriSegments = explode("/", trim($uri, "/"));
+
+            $routeSegments = explode("/", trim($route["uri"], "/"));
+
+            $match = true;
+
+            if (
+                count($uriSegments) === count($routeSegments) &&
+                strtoupper($route["method"]) === $requestMethod
+            ) {
+                $params = [];
+
+                $match = true;
+
+                for ($i = 0; $i < count($uriSegments); $i++) {
+                    if (
+                        $routeSegments[$i] !== $uriSegments[$i] &&
+                        !preg_match("/\{(.+?)\}/", $routeSegments[$i])
+                    ) {
+                        $match = false;
+                        break;
+                    }
+
+                    if (
+                        preg_match("/\{(.+?)\}/", $routeSegments[$i], $matches)
+                    ) {
+                        $params[$matches[1]] = $uriSegments[$i];
+                    }
+                }
+
+                if ($match) {
+                    $controller = "App\\Controllers\\" . $route["controller"];
+                    $controllerMethod = $route["controllerMethod"];
+
+                    $controllerInstance = new $controller();
+                    $controllerInstance->$controllerMethod($params);
+                    return;
+                }
             }
         }
 
