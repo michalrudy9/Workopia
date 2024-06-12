@@ -1,0 +1,16 @@
+{
+  "name": "michalrudy9/workopia",
+  "description": "Job listing appliaction",
+  "authors": [
+    {
+      "name": "Brad Traversy",
+      "email": "support@traversymedia.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "Framework/",
+      "App\\": "App/"
+    }
+  }
+}
