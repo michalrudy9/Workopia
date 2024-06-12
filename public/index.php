@@ -4,7 +4,7 @@ require_once "../helpers.php";
 require_once basePath("Router.php");
 require_once basePath("Database.php");
 
-$uri = $_SERVER["REQUEST_URI"];
+$uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $method = $_SERVER["REQUEST_METHOD"];
 
 $router = new Router();
