@@ -1,5 +1,9 @@
 <?php
 
+namespace Framework;
+
+use PDO, PDOStatement, PDOException, Exception;
+
 class Database
 {
     public $conn;
@@ -27,7 +31,7 @@ class Database
         }
     }
 
-    public function query(string $query, array $params): PDOStatement
+    public function query(string $query, array $params = []): PDOStatement
     {
         try {
             $sth = $this->conn->prepare($query);
