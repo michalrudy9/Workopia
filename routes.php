@@ -12,4 +12,6 @@ $router->get("/auth/login", "UserController@login");
 $router->post("/listings", "ListingController@store");
 $router->put("/listings/{id}", "ListingController@update");
 
+$router->post("/auth/register", "UserController@store");
+
 $router->delete("/listings/{id}", "ListingController@destroy");
