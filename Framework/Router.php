@@ -40,12 +40,16 @@ class Router
 
     public function delete(string $uri, string $controller): void
     {
-        $this->registerRoute("DELET", $uri, $controller);
+        $this->registerRoute("DELETE", $uri, $controller);
     }
 
     public function route(string $uri): void
     {
         $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+        if ($requestMethod === "POST" && isset($_POST["_method"])) {
+            $requestMethod = strtoupper($_POST["_method"]);
+        }
 
         foreach ($this->routes as $route) {
             $uriSegments = explode("/", trim($uri, "/"));
