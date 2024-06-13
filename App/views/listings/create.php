@@ -40,7 +40,7 @@
               type="text"
               name="salary"
               placeholder="Annual Salary"
-               value="<?= $listing["salary"] ?? "" ?>"
+              value="<?= $listing["salary"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -49,7 +49,7 @@
               type="text"
               name="requirements"
               placeholder="Requirements"
-               value="<?= $listing["requirements"] ?? "" ?>"
+              value="<?= $listing["requirements"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -58,7 +58,16 @@
               type="text"
               name="benefits"
               placeholder="Benefits"
-               value="<?= $listing["benefits"] ?? "" ?>"
+              value="<?= $listing["benefits"] ?? "" ?>"
+              class="w-full px-4 py-2 border rounded focus:outline-none"
+            />
+          </div>
+          <div class="mb-4">
+            <input
+              type="text"
+              name="tags"
+              placeholder="Tags"
+              value="<?= $listing["tags"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -70,7 +79,7 @@
               type="text"
               name="company"
               placeholder="Company Name"
-               value="<?= $listing["compnay"] ?? "" ?>"
+              value="<?= $listing["compnay"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -79,7 +88,7 @@
               type="text"
               name="address"
               placeholder="Address"
-               value="<?= $listing["address"] ?? "" ?>"
+              value="<?= $listing["address"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -88,7 +97,7 @@
               type="text"
               name="city"
               placeholder="City"
-               value="<?= $listing["city"] ?? "" ?>"
+              value="<?= $listing["city"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -97,7 +106,7 @@
               type="text"
               name="state"
               placeholder="State"
-               value="<?= $listing["state"] ?? "" ?>"
+              value="<?= $listing["state"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -106,7 +115,7 @@
               type="text"
               name="phone"
               placeholder="Phone"
-               value="<?= $listing["phone"] ?? "" ?>"
+              value="<?= $listing["phone"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
@@ -115,7 +124,7 @@
               type="email"
               name="email"
               placeholder="Email Address For Applications"
-               value="<?= $listing["email"] ?? "" ?>"
+              value="<?= $listing["email"] ?? "" ?>"
               class="w-full px-4 py-2 border rounded focus:outline-none"
             />
           </div>
