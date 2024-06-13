@@ -71,7 +71,14 @@ class ListingController
 
         $newListingData["user_id"] = 1;
         $newListingData = array_map("sanitize", $newListingData);
-        $requiredFields = ["title", "description", "email", "city", "state"];
+        $requiredFields = [
+            "title",
+            "description",
+            "salary",
+            "email",
+            "city",
+            "state",
+        ];
         $errors = [];
 
         foreach ($requiredFields as $field) {
@@ -89,7 +96,27 @@ class ListingController
                 "listing" => $newListingData,
             ]);
         } else {
-            echo "Success";
+            $fields = [];
+
+            foreach ($newListingData as $field => $value) {
+                $fields[] = $field;
+            }
+
+            $fields = implode(", ", $fields);
+            $values = [];
+
+            foreach ($newListingData as $field => $value) {
+                if ($value === "") {
+                    $newListingData[$field] = null;
+                }
+                $values[] = ":" . $field;
+            }
+            $values = implode(", ", $values);
+
+            $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
+            $this->db->query($query, $newListingData);
+
+            redirect("listings");
         }
     }
 }
