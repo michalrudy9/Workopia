@@ -3,6 +3,7 @@
 namespace Framework;
 
 use App\Controllers\ErrorController;
+use Framework\Middleware\Authorize;
 
 class Router
 {
@@ -11,7 +12,8 @@ class Router
     public function registerRoute(
         string $method,
         string $uri,
-        string $action
+        string $action,
+        array $middleware = []
     ): void {
         list($controller, $controllerMethod) = explode("@", $action);
 
@@ -20,27 +22,40 @@ class Router
             "uri" => $uri,
             "controller" => $controller,
             "controllerMethod" => $controllerMethod,
+            "middleware" => $middleware,
         ];
     }
 
-    public function get(string $uri, string $controller): void
-    {
-        $this->registerRoute("GET", $uri, $controller);
+    public function get(
+        string $uri,
+        string $controller,
+        array $middleware = []
+    ): void {
+        $this->registerRoute("GET", $uri, $controller, $middleware);
     }
 
-    public function post(string $uri, string $controller): void
-    {
-        $this->registerRoute("POST", $uri, $controller);
+    public function post(
+        string $uri,
+        string $controller,
+        array $middleware = []
+    ): void {
+        $this->registerRoute("POST", $uri, $controller, $middleware);
     }
 
-    public function put(string $uri, string $controller): void
-    {
-        $this->registerRoute("PUT", $uri, $controller);
+    public function put(
+        string $uri,
+        string $controller,
+        array $middleware = []
+    ): void {
+        $this->registerRoute("PUT", $uri, $controller, $middleware);
     }
 
-    public function delete(string $uri, string $controller): void
-    {
-        $this->registerRoute("DELETE", $uri, $controller);
+    public function delete(
+        string $uri,
+        string $controller,
+        array $middleware = []
+    ): void {
+        $this->registerRoute("DELETE", $uri, $controller, $middleware);
     }
 
     public function route(string $uri): void
@@ -83,6 +98,10 @@ class Router
                 }
 
                 if ($match) {
+                    foreach ($route["middleware"] as $middleware) {
+                        (new Authorize())->handle($middleware);
+                    }
+                    
                     $controller = "App\\Controllers\\" . $route["controller"];
                     $controllerMethod = $route["controllerMethod"];
 

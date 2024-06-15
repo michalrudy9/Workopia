@@ -2,18 +2,18 @@
 
 $router->get("/", "HomeController@index");
 $router->get("/listings", "ListingController@index");
-$router->get("/listings/create", "ListingController@create");
-$router->get("/listings/edit/{id}", "ListingController@edit");
+$router->get("/listings/create", "ListingController@create", ["auth"]);
+$router->get("/listings/edit/{id}", "ListingController@edit", ["auth"]);
 $router->get("/listings/{id}", "ListingController@show");
 
-$router->get("/auth/register", "UserController@create");
-$router->get("/auth/login", "UserController@login");
+$router->get("/auth/register", "UserController@create", ["guest"]);
+$router->get("/auth/login", "UserController@login", ["guest"]);
 
-$router->post("/listings", "ListingController@store");
-$router->put("/listings/{id}", "ListingController@update");
+$router->post("/listings", "ListingController@store", ["auth"]);
+$router->put("/listings/{id}", "ListingController@update", ["auth"]);
 
-$router->post("/auth/register", "UserController@store");
-$router->post("/auth/logout", "UserController@logout");
-$router->post("/auth/login", "UserController@authenticate");
+$router->post("/auth/register", "UserController@store", ["guest"]);
+$router->post("/auth/logout", "UserController@logout", ["auth"]);
+$router->post("/auth/login", "UserController@authenticate", ["guest"]);
 
-$router->delete("/listings/{id}", "ListingController@destroy");
+$router->delete("/listings/{id}", "ListingController@destroy", ["auth"]);
