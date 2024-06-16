@@ -17,7 +17,7 @@ class HomeController
     public function index(): void
     {
         $listings = $this->db
-            ->query("select * from listings limit 6")
+            ->query("SELECT * FROM listings ORDER BY created_at DESC LIMIT 6")
             ->fetchAll();
 
         loadView("home", ["listings" => $listings]);
